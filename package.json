@@ -1,0 +1,22 @@
+{
+    "name": "vanilla-js-parcel-template",
+    "version": "1.0.0",
+    "description": "Template for vanilla js with parcel bundler",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel src/index.html"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ronikiienko/vanilla-js-parcel-template.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ronikiienko/vanilla-js-parcel-template/issues"
+    },
+    "homepage": "https://github.com/ronikiienko/vanilla-js-parcel-template#readme",
+    "dependencies": {
+        "parcel": "^2.8.3"
+    }
+}
