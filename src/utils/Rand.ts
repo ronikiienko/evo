@@ -128,4 +128,8 @@ export class Rand {
     static sign() {
         return Math.random() < 0.5 ? 1 : -1;
     }
+
+    static bool() {
+        return Math.random() < 0.5;
+    }
 }

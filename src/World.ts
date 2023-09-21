@@ -17,4 +17,12 @@ export class World {
             creature.update()
         }
     }
+
+    removeCreature(creatureToRemove: Creature) {
+        const indexToRemove = this.creatures.findIndex(instance => instance === creatureToRemove);
+
+        if (indexToRemove !== -1) {
+            this.creatures.splice(indexToRemove, 1);
+        }
+    }
 }

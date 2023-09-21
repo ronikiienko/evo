@@ -2,21 +2,16 @@ import {Rand} from "../utils/Rand";
 import {Rang} from "../utils/Rang";
 import {Color} from "../utils/Color";
 import {Numb} from "../utils/Numb";
+import {Time} from "../utils/Time";
 
 const evolvableTraitsTypes = {
-    maxHp: 'maxHp',
-    strength: 'strength',
-    size: 'size',
-    color: 'color',
-    visibilityRange: 'visibilityRange'
+    maxSpeed: 'maxSpeed',
+    size: 'size'
 }
 
 type EvolvableTraitsObj = {
-    maxHp: number
-    strength: number
+    maxSpeed: number,
     size: number
-    color: Color
-    visibilityRange: number
 }
 export class EvolvableTraits {
     evolvableTraitsObj: EvolvableTraitsObj
@@ -25,11 +20,8 @@ export class EvolvableTraits {
     }
     clone(): EvolvableTraits {
         const clonedEvolvableTraitsObj: EvolvableTraitsObj = {
-            maxHp: this.evolvableTraitsObj.maxHp,
-            strength: this.evolvableTraitsObj.strength,
-            size: this.evolvableTraitsObj.size,
-            color: new Color(this.evolvableTraitsObj.color.rgba),
-            visibilityRange: this.evolvableTraitsObj.visibilityRange
+            maxSpeed: this.evolvableTraitsObj.maxSpeed,
+            size: this.evolvableTraitsObj.size
         };
 
         return new EvolvableTraits(clonedEvolvableTraitsObj);
@@ -39,43 +31,27 @@ export class EvolvableTraits {
         const evolvableTraitsKeys = Object.keys(newEvolvableTraits.evolvableTraitsObj)
         const evolvedKey = evolvableTraitsKeys[Rand.inRange(new Rang(0, evolvableTraitsKeys.length - 1))]
         switch (evolvedKey) {
-            case evolvableTraitsTypes.maxHp: {
-                newEvolvableTraits.evolvableTraitsObj.maxHp = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.maxHp + 0.1 * Rand.sign(), 0, 1)
+            case evolvableTraitsTypes.maxSpeed: {
+                newEvolvableTraits.evolvableTraitsObj.maxSpeed = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.maxSpeed + 0.1, 0, 1)
             }
             break;
             case evolvableTraitsTypes.size: {
-                newEvolvableTraits.evolvableTraitsObj.size = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.size + 5 * Rand.sign(), 1, 50)
+                newEvolvableTraits.evolvableTraitsObj.size = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.size + newEvolvableTraits.evolvableTraitsObj.size * 0.5 * Rand.sign(), 0, 1)
             }
-                break;
-            case evolvableTraitsTypes.strength: {
-                newEvolvableTraits.evolvableTraitsObj.strength = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.strength + 0.1 * Rand.sign(), 0, 1)
-            }
-                break;
-            case evolvableTraitsTypes.color: {
-                newEvolvableTraits.evolvableTraitsObj.color = Color.randomColor()
-            }
-                break;
-            case evolvableTraitsTypes.visibilityRange: {
-                newEvolvableTraits.evolvableTraitsObj.visibilityRange = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.visibilityRange + 5 * Rand.sign(), 1, 100)
-            }
-                break;
         }
         return newEvolvableTraits
     }
 
+    get maxSpeed() {
+        return this.evolvableTraitsObj.maxSpeed
+    }
+    get maxSpeedReal() {
+        return (this.evolvableTraitsObj.maxSpeed + 0.001) * 400
+    }
     get size() {
         return this.evolvableTraitsObj.size
     }
-    get strength() {
-        return this.evolvableTraitsObj.strength
-    }
-    get color() {
-        return this.evolvableTraitsObj.color
-    }
-    get visibilityRange() {
-        return this.evolvableTraitsObj.visibilityRange
-    }
-    get maxHp() {
-        return this.evolvableTraitsObj.maxHp
+    get sizeReal() {
+        return Math.max((this.evolvableTraitsObj.size + 0.001) * 50, 1)
     }
 }

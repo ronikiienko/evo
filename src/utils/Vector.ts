@@ -92,4 +92,17 @@ export class Vector {
     clone() {
         return new Vector({x: this.x, y: this.y})
     }
+
+    limitMagnitude(maxMagnitude: number) {
+        const currentMagnitude = this.magnitude;
+
+        let newX = this.x;
+        let newY = this.y;
+        if (currentMagnitude > maxMagnitude) {
+            const scaleFactor = maxMagnitude / currentMagnitude;
+            newX = scaleFactor * this.x;
+            newY = scaleFactor * this.y;
+        }
+        return new Vector({x: newX, y: newY})
+    }
 }

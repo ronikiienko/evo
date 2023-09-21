@@ -13,14 +13,17 @@ import {Color} from "./utils/Color";
 import {EvolvableTraits} from "./Creature/EvolvableTraits";
 import {Traits} from "./Creature/Traits";
 
-const canvas = new Canvas(document.querySelector('canvas'), 500, 500);
+const worldWidth = window.innerWidth
+const worldHeight = window.innerHeight
+
+const canvas = new Canvas(document.querySelector('canvas'), worldWidth, worldHeight);
 
 
-const world = new World(new Rectangle(0, 0, 500, 500))
+const world = new World(new Rectangle(0, 0, worldWidth, worldHeight))
 const graphics = new Graphics(canvas, world);
 const physics = new Physics(world)
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 200; i++) {
     world.addCreature(new Creature({
         position: new Vector({
             x: Rand.inRange(new Rang(0, canvas.width)),
@@ -29,18 +32,14 @@ for (let i = 0; i < 20; i++) {
         world: world,
         velocity: new Vector({x: Rand.inRange(new Rang(0, 200)), y: Rand.inRange(new Rang(0, 200))}),
         traits: new Traits({
-            isPredator: false
+            isPredator: Rand.bool()
         }),
         evolvableTraits: new EvolvableTraits({
-            size: 10,
-            color: Color.randomColor(),
-            maxHp: 0.2,
-            strength: 0.2,
-            visibilityRange: 0.2
+            maxSpeed: 0.2,
+            size: 0.05
         })
     }))
 }
-
 const cb = (dt: Time) => {
     physics.update(dt)
     world.update(dt)

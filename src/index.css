@@ -1,3 +1,12 @@
 .render-canvas {
     image-rendering: pixelated;
 }
+
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+    height: inherit;
+}
