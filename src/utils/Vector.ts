@@ -136,9 +136,9 @@ export class Vector {
         return new Vector({ x: mergedX, y: mergedY });
     }
 
-    angularMerge(otherVector: Vector) {
-        const averageMagnitude = this.magnitude
-        const averageAngle = this.angle.averageShortest(otherVector.angle)
+    angularMerge(otherVector: Vector, secondWeight: number) {
+        const averageMagnitude = this.magnitude * (1 - secondWeight) + otherVector.magnitude * secondWeight
+        const averageAngle = this.angle.averageShortest(otherVector.angle, secondWeight)
         return new Vector({angle: averageAngle, magnitude: averageMagnitude})
     }
 }

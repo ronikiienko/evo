@@ -23,10 +23,10 @@ const world = new World(new Rectangle(0, 0, worldWidth, worldHeight))
 const graphics = new Graphics(canvas, world);
 const physics = new Physics(world)
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 50; i++) {
     world.addCreature(new Creature({
         position: new Vector({
-            x: Rand.inRange(new Rang(0, canvas.width / 2)),
+            x: Rand.inRange(new Rang(0, canvas.width / 4 * 3)),
             y: Rand.inRange(new Rang(0, canvas.height))
         }),
         world: world,

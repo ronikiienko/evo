@@ -73,10 +73,10 @@ export class Angle {
         return this.deg === angle.deg
     }
 
-    averageShortest(angle: Angle): Angle {
+    averageShortest(angle: Angle, secondWeight = 0.5): Angle {
         let diff = angle.deg - this.deg;
         diff = ((diff + 180) % 360) - 180;
-        return new Angle(this.deg + diff / 2);
+        return new Angle(this.deg + diff * secondWeight);
     }
 
     averageAbsolute(angle: Angle): Angle {

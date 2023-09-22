@@ -47,7 +47,7 @@ export class Creature {
     }
 
     divide() {
-        if (this.world.creatures.length > 500) return
+        // if (this.world.creatures.length > 500) return
         this.lastDivision = new Time()
         const clone = new Creature({
             world: this.world,
@@ -126,7 +126,7 @@ export class Creature {
             } else {
                 dangerAcceleration = this.position.vectorFrom(distanceToClosestPredator.creature.position).multiply(dangerCoefficient)
             }
-            const acceleration = dangerAcceleration.add(stoppingAcceleration).limitMagnitude(20)
+            const acceleration = dangerAcceleration.add(stoppingAcceleration).limitMagnitude(4)
             this.velocity = this.velocity.add(acceleration).limitMagnitude(this.evolvableTraits.maxSpeedReal)
         } else {
             this.velocity = this.velocity.multiply(0.9)
