@@ -1,8 +1,6 @@
 import {Rand} from "../utils/Rand";
 import {Rang} from "../utils/Rang";
-import {Color} from "../utils/Color";
 import {Numb} from "../utils/Numb";
-import {Time} from "../utils/Time";
 
 const evolvableTraitsTypes = {
     maxSpeed: 'maxSpeed',
