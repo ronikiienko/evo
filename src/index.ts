@@ -23,7 +23,7 @@ const world = new World(new Rectangle(0, 0, worldWidth, worldHeight))
 const graphics = new Graphics(canvas, world);
 const physics = new Physics(world)
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 400; i++) {
     world.addCreature(new Creature({
         position: new Vector({
             x: Rand.inRange(new Rang(0, canvas.width / 4 * 3)),
@@ -58,6 +58,16 @@ for (let i = 0; i < 400; i++) {
     }))
 }
 const cb = (dt: Time) => {
+    // console.time('Physics')
+    // physics.update(dt)
+    // console.timeEnd('Physics')
+    // console.time('World')
+    // world.update(dt)
+    // console.timeEnd('World')
+    // console.time('Graphics')
+    // graphics.update()
+    // console.timeEnd('Graphics')
+
     physics.update(dt)
     world.update(dt)
     graphics.update()
