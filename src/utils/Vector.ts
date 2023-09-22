@@ -1,4 +1,5 @@
 import {Angle} from './Angle';
+import {Numb} from "./Numb";
 
 type VectorInit = {
     x: number,
@@ -88,6 +89,9 @@ export class Vector {
     reverseY() {
         return new Vector({x: this.x, y: -this.y})
     }
+    reverse() {
+        return new Vector({x: -this.x, y: -this.y})
+    }
 
     clone() {
         return new Vector({x: this.x, y: this.y})
@@ -104,5 +108,19 @@ export class Vector {
             newY = scaleFactor * this.y;
         }
         return new Vector({x: newX, y: newY})
+    }
+    vectorTo(otherVector: Vector) {
+        return otherVector.subtract(this)
+    }
+    vectorFrom(otherVector: Vector) {
+        return this.subtract(otherVector)
+    }
+
+    merge(otherVector: Vector, secondVectorStrength: number): Vector {
+        secondVectorStrength = Numb.constrain(secondVectorStrength, 0, 1)
+        const mergedX = (1 - secondVectorStrength) * this.x + secondVectorStrength * otherVector.x;
+        const mergedY = (1 - secondVectorStrength) * this.y + secondVectorStrength * otherVector.y;
+
+        return new Vector({ x: mergedX, y: mergedY });
     }
 }

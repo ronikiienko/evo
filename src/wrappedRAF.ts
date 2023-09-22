@@ -8,7 +8,7 @@ export const wrappedRAF = (callback: Function) => {
         let newTime = new Time(timestamp)
         const dt = newTime.subtract(lastTime)
         lastTime = newTime
-        callback(dt)
+        callback(new Time(20))
         requestAnimationFrame(localCb)
     }
     requestAnimationFrame(localCb)

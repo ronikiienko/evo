@@ -30,7 +30,7 @@ export class EvolvableTraits {
         const evolvedKey = evolvableTraitsKeys[Rand.inRange(new Rang(0, evolvableTraitsKeys.length - 1))]
         switch (evolvedKey) {
             case evolvableTraitsTypes.maxSpeed: {
-                newEvolvableTraits.evolvableTraitsObj.maxSpeed = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.maxSpeed + 0.1, 0, 1)
+                newEvolvableTraits.evolvableTraitsObj.maxSpeed = Numb.constrain(newEvolvableTraits.evolvableTraitsObj.maxSpeed + 0.1 * Rand.sign(), 0, 1)
             }
             break;
             case evolvableTraitsTypes.size: {
