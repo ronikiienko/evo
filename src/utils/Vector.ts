@@ -6,13 +6,25 @@ type VectorInit = {
     y: number
 }
 
+type AngleInit = {
+    angle: Angle,
+    magnitude: number
+}
+
 export class Vector {
     #x: number;
     #y: number;
 
-    constructor(init: VectorInit) {
-        this.#x = init.x
-        this.#y = init.y
+    constructor(init: VectorInit | AngleInit) {
+        if ("x" in init) {
+            this.#x = init.x;
+            this.#y = init.y;
+        } else if ("angle" in init) {
+            this.#x = init.magnitude * init.angle.cos;
+            this.#y = init.magnitude * init.angle.sin;
+        } else {
+            throw new Error('Invalid initialization for Vector');
+        }
     }
 
     get angle() {
@@ -122,5 +134,11 @@ export class Vector {
         const mergedY = (1 - secondVectorStrength) * this.y + secondVectorStrength * otherVector.y;
 
         return new Vector({ x: mergedX, y: mergedY });
+    }
+
+    angularMerge(otherVector: Vector) {
+        const averageMagnitude = this.magnitude
+        const averageAngle = this.angle.averageShortest(otherVector.angle)
+        return new Vector({angle: averageAngle, magnitude: averageMagnitude})
     }
 }

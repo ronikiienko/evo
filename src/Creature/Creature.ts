@@ -30,7 +30,7 @@ export class Creature {
     lastEaten: Time
     lifespan: Time
     reproductionInterval: Time
-    visibilityRange: number = 50
+    visibilityRange: number = Rand.inRange(new Rang(40, 70))
 
     constructor(init: CreatureInit) {
         this.id = Rand.getId()
@@ -126,7 +126,7 @@ export class Creature {
             } else {
                 dangerAcceleration = this.position.vectorFrom(distanceToClosestPredator.creature.position).multiply(dangerCoefficient)
             }
-            const acceleration = dangerAcceleration.add(stoppingAcceleration).limitMagnitude(4)
+            const acceleration = dangerAcceleration.add(stoppingAcceleration).limitMagnitude(20)
             this.velocity = this.velocity.add(acceleration).limitMagnitude(this.evolvableTraits.maxSpeedReal)
         } else {
             this.velocity = this.velocity.multiply(0.9)

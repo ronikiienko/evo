@@ -23,16 +23,33 @@ const world = new World(new Rectangle(0, 0, worldWidth, worldHeight))
 const graphics = new Graphics(canvas, world);
 const physics = new Physics(world)
 
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 100; i++) {
     world.addCreature(new Creature({
         position: new Vector({
-            x: Rand.inRange(new Rang(0, canvas.width)),
+            x: Rand.inRange(new Rang(0, canvas.width / 2)),
             y: Rand.inRange(new Rang(0, canvas.height))
         }),
         world: world,
         velocity: new Vector({x: Rand.inRange(new Rang(0, 200)), y: Rand.inRange(new Rang(0, 200))}),
         traits: new Traits({
-            isPredator: Rand.bool()
+            isPredator: true
+        }),
+        evolvableTraits: new EvolvableTraits({
+            maxSpeed: 0.2,
+            size: 0.05
+        })
+    }))
+}
+for (let i = 0; i < 400; i++) {
+    world.addCreature(new Creature({
+        position: new Vector({
+            x: Rand.inRange(new Rang(canvas.width / 2, canvas.width)),
+            y: Rand.inRange(new Rang(0, canvas.height))
+        }),
+        world: world,
+        velocity: new Vector({x: 0, y: 0}),
+        traits: new Traits({
+            isPredator: false
         }),
         evolvableTraits: new EvolvableTraits({
             maxSpeed: 0.2,
